@@ -1,8 +1,8 @@
 <template>
   <h1>FavoriteList</h1>
-  <div v-if="songsIds.length >= 1" class="list-favorites-songs">
-    <div v-for="song in songsIds" id="song" :key="song">
-      <p> {{ song.track }} - {{ song.artist }}</p>
+  <div v-if="songs.length >= 1" class="list-favorites-songs">
+    <div v-for="song in songs" id="song" :key="song">
+      <a :href="'/#/'+ song.id_track + '/' + song.id_artist + '/' + song.id_album"> {{ song.track }} - {{ song.artist }}</a>
     </div>
   </div>
 </template>
@@ -14,7 +14,8 @@ export default {
   name: "FavoriteList",
   data(){
     return{
-      songsIds: []
+      songs: [],
+      songsIds: null,
     }
   },
   mounted() {
@@ -23,15 +24,22 @@ export default {
   methods:{
     // Get data(songs) in localstorage and stock them into songsIds
     getFavoritesSongs() {
-      var values = [],
-          keys = Object.keys(localStorage),
+      var keys = Object.keys(localStorage),
           i = keys.length;
       while ( i-- ) {
-        values.push( localStorage.getItem(keys[i]) );
-        axios.get(localStorage.getItem(keys[i]) + "?apikey=e6ef26mYlSLiqcjSVpR6nhLirotXcxP2vqVhaDoZzyMflqqpFObYpiG4")
-        .then((response) => {console.log(response.data.result); this.songsIds.push(response.data.result) })
-        .catch((error) => { console.log(error) });
+        if(keys[i] > 10){
+          var item = JSON.parse(localStorage.getItem(keys[i]));
+          this.axiosRequest(item);
+        }
       }
+    },
+    axiosRequest(item){
+      var song = null;
+      axios.get("https://api.happi.dev/v1/music/artists/" + item.id_artist + "/albums/" + item.id_album + "/tracks/" +
+          item.id_track + '?apikey=e6ef26mYlSLiqcjSVpR6nhLirotXcxP2vqVhaDoZzyMflqqpFObYpiG4')
+          .then((response) => {song = response.data.result; song.id_album = item.id_album;
+            song.id_artist = item.id_artist; song.id_track = item.id_track; console.log(song); this.songs.push(song); })
+          .catch((error) => { console.log(error) });
     }
   }
 }
