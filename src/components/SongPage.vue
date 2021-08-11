@@ -1,10 +1,11 @@
 <template>
-  <h1>yo</h1>
+  <h1>{{ song }}</h1>
 </template>
 
 <script>
 export default {
   name: "SongPage",
+  props: ['song']
 }
 </script>
 

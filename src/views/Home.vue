@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Searcher></Searcher>
-    <SongPage></SongPage>
+    <Searcher @openPage="getSongFromChild"></Searcher>
+    <SongPage :song="song"></SongPage>
   </div>
 </template>
 
@@ -12,7 +12,17 @@ import SongPage from '@/components/SongPage.vue'
 
 export default {
   name: 'Home',
-  components: { Searcher, SongPage
+  data(){
+    return{
+      song: " "
+    }
+  },
+  components: { Searcher, SongPage },
+  methods: {
+    getSongFromChild(song){
+      console.log(song);
+      this.song = song;
+    }
   }
 }
 </script>
