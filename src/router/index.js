@@ -4,7 +4,7 @@ import FavoriteList from "../views/FavoriteList";
 
 const routes = [
   {
-    path: '/',
+    path: '/:id_track?/:id_artist?/:id_album?',
     name: 'Home',
     component: Home
   },
