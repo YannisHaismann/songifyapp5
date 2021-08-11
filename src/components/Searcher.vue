@@ -14,7 +14,7 @@ export default {
     return{
       searchBarValue: "",
       urlApiHappi: "",
-      listSongApiHappi: 1
+      listSongApiHappi: null
     }
   },
   emits: ['openPage'],
