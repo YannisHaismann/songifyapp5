@@ -1,16 +1,19 @@
 <template>
   <Header></Header>
-  <Home></Home>
+  <nav>
+    <router-link to="/">Accueil</router-link>
+    <router-link to="/Favorites">Favorites</router-link>
+  </nav>
+  <router-view />
 </template>
 <style lang="scss">
 
 </style>
 <script>
-import Header from "@/views/Header";
-import Home from "@/views/Home";
+import Header from "@/components/Header";
 
 export default {
-  components: {Header, Home},
+  components: {Header},
   data(){
     return{
       ddt: "cc",
