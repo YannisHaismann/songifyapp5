@@ -1,12 +1,14 @@
 <template>
   <div v-if="song != null && album != null" class="song-informations">
-    <h1>{{ song.track }} - {{ song.artist }}</h1>
-    <img :src="album.cover" :alt="album.album">
-    <img :src="urlSongGif" alt="">
-    <div @click="addToFavorite" class="add-favorite-btn">
-      <img v-if="favorite"  src="../assets/favorite-true.png" alt="">
-      <img v-else src="../assets/favorite-false.png" alt="">
-    </div>
+    <h2 class="song-informations__title">
+      {{ song.track }} - {{ song.artist }}
+      <div class="song-informations__favorite-btn add-favorite-btn" @click="addToFavorite">
+        <img v-if="favorite"  src="../assets/favorite-true.png" alt="">
+        <img v-else src="../assets/favorite-false.png" alt="">
+      </div>
+    </h2>
+    <img class="song-informations__album-cover" :src="album.cover" :alt="album.album">
+    <img class="song-informations__gif" :src="urlSongGif" alt="">
   </div>
 </template>
 
@@ -91,6 +93,17 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .song-informations{
+    display: grid;
+    grid-template-columns: repeat(20, 5%);
+    grid-template-rows: repeat(20, 4%);
+    padding: 15px;
+    &__title{
+      grid-column: 1 / 21;
+      grid-row: 1 / 2;
+      text-align: center;
+      text-decoration: underline;
+    }
+  }
 </style>

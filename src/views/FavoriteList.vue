@@ -1,8 +1,10 @@
 <template>
-  <h1>FavoriteList</h1>
-  <div v-if="songs.length >= 1" class="list-favorites-songs">
-    <div v-for="song in songs" id="song" :key="song">
-      <a :href="'/#/'+ song.id_track + '/' + song.id_artist + '/' + song.id_album"> {{ song.track }} - {{ song.artist }}</a>
+  <div class="favorite-component">
+    <h2 class="favorite-component__title">Mes musiques favorites</h2>
+    <div v-if="songs.length >= 1" class="favorite-component__list list-favorites-songs">
+      <div v-for="song in songs" id="song" :key="song">
+        <a :href="'/#/'+ song.id_track + '/' + song.id_artist + '/' + song.id_album"> {{ song.track }} - {{ song.artist }}</a>
+      </div>
     </div>
   </div>
 </template>
@@ -45,6 +47,17 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .favorite-component{
+    &__title{
+      text-align: center;
+      text-decoration: underline;
+    }
+    &__list{
+      padding: 30px;
+      & > div{
+        margin: 10px;
+      }
+    }
+  }
 </style>

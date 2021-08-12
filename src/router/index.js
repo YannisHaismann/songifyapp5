@@ -6,7 +6,7 @@ const routes = [
   {
     path: '/:id_track?/:id_artist?/:id_album?',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/Favorites',
