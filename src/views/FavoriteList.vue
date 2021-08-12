@@ -40,7 +40,7 @@ export default {
       axios.get("https://api.happi.dev/v1/music/artists/" + item.id_artist + "/albums/" + item.id_album + "/tracks/" +
           item.id_track + '?apikey=e6ef26mYlSLiqcjSVpR6nhLirotXcxP2vqVhaDoZzyMflqqpFObYpiG4')
           .then((response) => {song = response.data.result; song.id_album = item.id_album;
-            song.id_artist = item.id_artist; song.id_track = item.id_track; console.log(song); this.songs.push(song); })
+            song.id_artist = item.id_artist; song.id_track = item.id_track; this.songs.push(song); })
           .catch((error) => { console.log(error) });
     }
   }
