@@ -1,10 +1,10 @@
 # songify
 
-// See the result of this project directly \\
+- See the result of this project directly -
 
 https://songifyapp5.vercel.app/#/
 
-// VueJS 3 instruction \\
+- VueJS 3 instruction -
 
 ## Project setup
 ```
