@@ -1,5 +1,5 @@
 <template>
-  <div v-if="song != null && album != null" class="song-informations">
+  <div v-if="showBool" class="song-informations">
     <h2 class="song-informations__title">
       {{ song.track }} - {{ song.artist }}
       <div class="song-informations__favorite-btn add-favorite-btn" @click="addToFavorite">
@@ -23,8 +23,9 @@ import axios from "axios";
 export default {
   name: "SongPage",
   mounted() {
-    this.showSong();
-    this.getSongAndMakeItGif(this.song);
+      this.showSong();
+      this.getSongAndMakeItGif(this.song);
+      this.checkIfIsFavorite();
   },
   created() {
     this.$watch(
@@ -32,11 +33,12 @@ export default {
         () => {
           this.showSong();
           this.getSongAndMakeItGif(this.song);
+          this.checkIfIsFavorite();
         }
     )
   },
-  updated() {
-    this.checkIfIsFavorite();
+  unmounted() {
+    this.showBool = false;
   },
   data(){
     return{
@@ -46,7 +48,8 @@ export default {
       urlGiphy: "",
       urlSongGif: "",
       urlTrackApiHappi: "",
-      urlAlbumApiHappi: ""
+      urlAlbumApiHappi: "",
+      showBool: false
     }
   },
   methods:{
@@ -62,7 +65,7 @@ export default {
     // Check if the track is in localstorage and update variable favorite in function
     checkIfIsFavorite(){
       console.log(this.$route.params);
-      if(localStorage.getItem(this.song.id_track)){
+      if(localStorage.getItem(this.$route.params.id_track) != null){
         this.favorite = true;
       }else{
         this.favorite = false;
@@ -87,7 +90,7 @@ export default {
       this.urlAlbumApiHappi = "https://api.happi.dev/v1/music/artists/" + this.$route.params.id_artist + "/albums/" + this.$route.params.id_album + '?apikey=e6ef26mYlSLiqcjSVpR6nhLirotXcxP2vqVhaDoZzyMflqqpFObYpiG4';
       axios
           .get(this.urlAlbumApiHappi)
-          .then((response) => {console.log(response); this.album = response.data.result;})
+          .then((response) => {this.showBool = true; this.album = response.data.result;})
           .catch(error => console.log(error));
     }
   },
