@@ -35,6 +35,11 @@ export default {
         }
     )
   },
+  updated() {
+    if(this.$route.params.id_track == ""){
+      this.showBool = false;
+    }
+  },
   data(){
     return{
       favorite: false,
