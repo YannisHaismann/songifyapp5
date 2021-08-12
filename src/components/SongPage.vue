@@ -14,6 +14,10 @@
     <img class="song-informations__album-cover" :src="album.cover" :alt="album.album">
     <img class="song-informations__gif" :src="urlSongGif" alt="">
   </div>
+  <div v-else>
+    <br>
+    <p class="introduction-sentence">🚀 Tap the title of a track just up there ! 🚀 </p>
+  </div>
 </template>
 
 <script>
@@ -90,6 +94,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .introduction-sentence{
+    text-align: center;
+  }
   .song-informations{
     display: grid;
     grid-template-columns: repeat(20, 5%);
