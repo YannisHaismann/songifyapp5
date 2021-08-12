@@ -7,6 +7,10 @@
         <img v-else src="../assets/favorite-false.png" alt="">
       </div>
     </h2>
+    <div class="song-informations__text">
+      <p class="song-informations__text__album-title">From: {{ song.album }}</p>
+      <p class="song-informations__text__bpm">Bpm: {{ song.bpm }}</p>
+    </div>
     <img class="song-informations__album-cover" :src="album.cover" :alt="album.album">
     <img class="song-informations__gif" :src="urlSongGif" alt="">
   </div>
@@ -97,13 +101,39 @@ export default {
   .song-informations{
     display: grid;
     grid-template-columns: repeat(20, 5%);
-    grid-template-rows: repeat(20, 4%);
+    grid-template-rows: repeat(20, 30px);
     padding: 15px;
     &__title{
       grid-column: 1 / 21;
       grid-row: 1 / 2;
       text-align: center;
       text-decoration: underline;
+    }
+    &__album-cover{
+      grid-column: 3 / 11;
+      grid-row: 4 / 10;
+      @media (min-width: 1024px) {
+        width: 400px;
+      }
+      @media (max-width: 1024px) {
+        width: 200px;
+      }
+    }
+    &__text{
+      grid-column: 12 / 20;
+      grid-row: 4 / 6;
+    }
+    &__gif{
+      @media (min-width: 1024px) {
+        width: 400px;
+        max-height: 400px;
+      }
+      @media (max-width: 1024px) {
+        width: 200px;
+        max-height: 200px;
+      }
+      grid-column: 12 / 20;
+      grid-row: 7 / 18;
     }
   }
 </style>

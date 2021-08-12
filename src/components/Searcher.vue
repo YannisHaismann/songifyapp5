@@ -1,8 +1,8 @@
 <template>
   <div class="searcher-component">
-    <input id="search-bar" type="text" @keyup="setMusic()" v-model="searchBarValue">
-    <div class="search-bar__list" name="list-songs" id="list-songs">
-      <a :href="'/#/'+ song.id_track + '/' + song.id_artist + '/' + song.id_album" v-for="song in listSongApiHappi" :key="song">{{ song.track }} - {{ song.artist }}</a>
+    <input @focus="show = true"  id="search-bar" type="text" @keyup="setMusic()" v-model="searchBarValue">
+    <div v-if="show" class="search-bar__list" name="list-songs" id="list-songs">
+      <a  @click="show = false" :href="'/#/'+ song.id_track + '/' + song.id_artist + '/' + song.id_album" v-for="song in listSongApiHappi" :key="song">{{ song.track }} - {{ song.artist }}</a>
     </div>
   </div>
 </template>
@@ -15,7 +15,8 @@ export default {
     return{
       searchBarValue: "",
       urlApiHappi: "",
-      listSongApiHappi: null
+      listSongApiHappi: null,
+      show: false
     }
   },
   methods:{
